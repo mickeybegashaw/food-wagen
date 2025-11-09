@@ -1,9 +1,39 @@
 @import "tailwindcss";
 
+
 :root {
-  --font-source-sans-pro: 'Source Sans 3', sans-serif;
+  --font-source-sans-pro: "Source Sans 3", sans-serif;
+  --color-primary: #f17228;
+  --color-secondary: #ffb30e;
+  --gradient-secondary: linear-gradient(
+    97.86deg,
+    #ffba26 -8.95%,
+    #ff9a0e 109.24%
+  );
 }
 
 body {
   font-family: var(--font-source-sans-pro);
+}
+
+.food-header {
+  @apply bg-white w-full h-14 md:h-[74px] py-3 md:py-4 px-4  md:px-[220px] shadow-[0_20px_40px_0_rgba(255,174,0,0.29)] flex items-center justify-between top-0 z-50;
+}
+
+.btn-primary {
+  @apply text-white py-2 px-4 rounded-md;
+  background-color: var(--color-primary);
+}
+
+.btn-secondary {
+  @apply text-white py-3 px-6 rounded-2xl text-[18px] font-bold cursor-pointer;
+  background: var(--gradient-secondary);
+}
+
+.txt-primary {
+  color: var(--color-primary);
+}
+
+.txt-secondary {
+  color: var(--color-secondary);
 }

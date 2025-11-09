@@ -3,6 +3,7 @@ import {
   Source_Sans_3, 
 } from 'next/font/google'; 
 import "./globals.css";
+import Header from "@/components/Header";
 
 const sourceSansPro = Source_Sans_3({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body
         className={`${sourceSansPro.variable} font-sans antialiased`}
       >
+        <Header/>
         {children}
       </body>
     </html>
