@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { 
+  Source_Sans_3, 
+} from 'next/font/google'; 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const sourceSansPro = Source_Sans_3({
+  subsets: ['latin'],
+  variable: '--font-source-sans-pro',
+  weight: ['300', '400', '600', '700'], 
+  style: ['normal', 'italic' ], 
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${sourceSansPro.variable} font-sans antialiased`}
       >
         {children}
       </body>
