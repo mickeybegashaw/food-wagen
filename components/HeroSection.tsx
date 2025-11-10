@@ -58,7 +58,7 @@ const HeroSection = () => {
           <Image
             src={HeroImage}
             alt="Hero Image"
-            className="object-cover h-[360px] bottom-0 absolute "
+            className="h-[350px] w-[350px] -bottom-10 right-5 shadow-[-30px_0_40px_rgba(0,0,0,0.4)] rounded-full absolute"
             priority
           />
         </div>
@@ -68,3 +68,8 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+
+
+
+
