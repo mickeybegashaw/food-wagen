@@ -4,6 +4,7 @@ import {
 } from 'next/font/google'; 
 import "./globals.css";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const sourceSansPro = Source_Sans_3({
   subsets: ['latin'],
@@ -30,6 +31,7 @@ export default function RootLayout({
       >
         <Header/>
         {children}
+        <Footer/>
       </body>
     </html>
   );
