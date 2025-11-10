@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Tag, Star, MoreVertical } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function MealCard({ food }: { food: any }) {
   const [openMenu, setOpenMenu] = useState(false);
@@ -14,13 +15,16 @@ export default function MealCard({ food }: { food: any }) {
       ? food.logo
       : "https://placehold.net/default.png";
   const foodName =
-    food.name && food.name.trim() !== ""
-      ? food.name
-      : "Unknown Meal";
+    food.name && food.name.trim() !== "" ? food.name : "Unknown Meal";
   const rating = food.rating || "0.0";
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden relative hover:shadow-lg transition-all duration-200 flex flex-col gap-5">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="bg-white rounded-xl overflow-hidden relative hover:shadow-xl transition-all duration-150 flex flex-col gap-5"
+    >
       {/* Image */}
       <div className="relative">
         <Image
@@ -32,7 +36,7 @@ export default function MealCard({ food }: { food: any }) {
         />
 
         {/* Price Tag */}
-        <div className="absolute top-4 left-2 bg-[#F17228] px-2 py-1 rounded-md text-sm font-semibold flex items-center text-white">
+        <div className="food-price absolute top-4 left-2 bg-[#F17228] px-2 py-1 rounded-md text-sm font-semibold flex items-center text-white">
           <Tag size={14} className="mr-1 fill-white stroke-none" />$
           {food.Price ?? "—"}
         </div>
@@ -41,7 +45,7 @@ export default function MealCard({ food }: { food: any }) {
       {/* Info */}
       <div className="flex flex-col gap-4 pb-4 justify-between">
         <div className="flex gap-3 items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="restaurant-logo flex items-center gap-3">
             <Image
               src={restaurantImage}
               alt="logo"
@@ -50,10 +54,10 @@ export default function MealCard({ food }: { food: any }) {
               className="h-12 w-12 rounded-xl object-cover border border-gray-200"
             />
             <div>
-              <h3 className="font-semibold text-lg text-[#424242] line-clamp-1">
+              <h3 className="food-name font-semibold text-lg text-[#424242] line-clamp-1">
                 {foodName}
               </h3>
-              <div className="flex items-center gap-1 text-yellow-400">
+              <div className="food-rating flex items-center gap-1 text-yellow-400">
                 <Star size={14} className="fill-yellow-400 stroke-none" />
                 <span>{rating}</span>
               </div>
@@ -79,7 +83,7 @@ export default function MealCard({ food }: { food: any }) {
 
         <div className="flex flex-col mt-auto">
           <div
-            className={`w-fit px-2 py-1 mt-1 text-md font-bold rounded-lg ${
+            className={`food-status w-fit px-2 py-1 mt-1 text-md font-bold rounded-lg ${
               food.open
                 ? "bg-[#79B93C33] text-[#79B93C]"
                 : "bg-[#F1722833] text-[#F17228]"
@@ -89,6 +93,6 @@ export default function MealCard({ food }: { food: any }) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

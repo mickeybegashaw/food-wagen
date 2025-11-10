@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import MealCard from "./MealCard";
+import DualRingLoader from "./ui/LoadingComponent";
 
 export default function FeaturedMeal() {
   const [foods, setFoods] = useState<any[]>([]);
@@ -28,14 +29,17 @@ export default function FeaturedMeal() {
 
   if (loading)
     return (
-      <section className="bg-white py-12 px-6 text-center">
-        <p className="text-gray-600 text-lg">Loading meals...</p>
+      <section className="h-screen">
+         <h1 className="font-bold  mb-10 text-center text-2xl md:text-3xl text-[#212121]">
+        Featured Meals
+      </h1>
+        <DualRingLoader/>
       </section>
     );
 
   if (error)
     return (
-      <section className="bg-white py-12 px-6 text-center">
+      <section className=" py-12 px-6 text-center">
         <p className="text-red-500 text-lg">Error: {error}</p>
       </section>
     );

@@ -1,4 +1,5 @@
 import { Instagram, Facebook, Twitter, Mail } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -8,33 +9,35 @@ export default function Footer() {
           {/* Company */}
           <div>
             <h3 className="text-lg font-semibold  mb-4">Company</h3>
-            <ul className="space-y-2 text-sm">
-              <li>About us</li>
-              <li>Team</li>
-              <li>Careers</li>
-              <li>Blog</li>
-            </ul>
+            <div className="space-y-2 text-sm flex flex-col">
+              <Link  href={"#"}>About us</Link>
+              <Link  href={"#"}>Team</Link>
+              <Link  href={"#"}>Careers</Link>
+                <Link  href={"#"}>Blog</Link>
+            </div>
           </div>
 
           {/* Contact */}
           <div>
             <h3 className="text-lg font-semibold  mb-4">Contact</h3>
-            <ul className="space-y-2 text-sm">
-              <li>Help & Support</li>
-              <li>Partner with us</li>
-              <li>Ride with us</li>
-            </ul>
+            <div className="space-y-2 text-sm flex flex-col">
+                <Link  href={"#"}>Help & Support</Link>
+                <Link  href={"#"}>Partner with us</Link>
+                
+                <Link  href={"#"}>Ride with us</Link>
+            </div>
           </div>
 
           {/* Legal */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2 text-sm">
-              <li>Terms & Conditions</li>
-              <li>Refund & Cancellation</li>
-              <li>Privacy Policy</li>
-              <li>Cookie Policy</li>
-            </ul>
+            <div className="space-y-2 text-sm flex flex-col">
+                <Link  href={"#"}>Terms & Conditions</Link>
+                <Link  href={"#"}>Refund & Cancellation</Link>
+                <Link  href={"#"}>Privacy Policy</Link>
+                <Link  href={"#"}>Cookie Policy</Link>
+             
+            </div>
           </div>
         </div>
 
