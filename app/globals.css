@@ -10,23 +10,35 @@
     #ffba26 -8.95%,
     #ff9a0e 109.24%
   );
+  --gradient-primary: linear-gradient(
+    97.86deg,
+    #FF7A7A -8.95%,
+    #F65900 109.24%
+  );
 }
+
+::placeholder {
+  color: #9E9E9E; 
+  font-size: 14px;
+  font-weight: 350;
+}
+
 
 body {
   font-family: var(--font-source-sans-pro);
 }
 
 .food-header {
-  @apply bg-white w-full h-14 md:h-[74px] py-3 md:py-4 px-4  md:px-[220px] shadow-[0_20px_40px_0_rgba(255,174,0,0.29)] flex items-center justify-between top-0 z-50;
+  @apply bg-white w-full h-[52px] py-3  px-4  md:pl-40 md:pr-20  shadow-[0_20px_40px_0_rgba(255,174,0,0.29)] flex items-center justify-between top-0 z-50;
 }
 
 .btn-primary {
-  @apply text-white py-2 px-4 rounded-md;
-  background-color: var(--color-primary);
+  @apply text-white cursor-pointer  ;
+  background: var(--gradient-primary);
 }
 
 .btn-secondary {
-  @apply text-white py-3 px-6 rounded-2xl text-[18px] font-bold cursor-pointer;
+  @apply text-white cursor-pointer ;
   background: var(--gradient-secondary);
 }
 
