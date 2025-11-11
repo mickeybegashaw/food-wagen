@@ -2,32 +2,17 @@
 import { useEffect, useState } from "react";
 import MealCard from "./MealCard";
 import DualRingLoader from "../ui/LoadingComponent";
+import { useFoods, useDeleteFood } from "@/lib/query";
+
 
 export default function FeaturedMeal() {
-  const [foods, setFoods] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+    const { data: foods = [], isLoading, error } = useFoods();
+
   const [showAll, setShowAll] = useState(false);
 
-  useEffect(() => {
-    const fetchFoods = async () => {
-      try {
-        const res = await fetch(
-          "https://6852821e0594059b23cdd834.mockapi.io/Food"
-        );
-        if (!res.ok) throw new Error("Failed to fetch data");
-        const data = await res.json();
-        setFoods(Array.isArray(data) ? data : []);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchFoods();
-  }, []);
+  
 
-  if (loading)
+  if (isLoading)
     return (
       <section className="h-screen">
          <h1 className="font-bold  mb-10 text-center text-2xl md:text-3xl text-[#212121]">
@@ -40,7 +25,7 @@ export default function FeaturedMeal() {
   if (error)
     return (
       <section className=" py-12 px-6 text-center">
-        <p className="text-red-500 text-lg">Error: {error}</p>
+        <p className="text-red-500 text-lg">Error: {error.message}</p>
       </section>
     );
 

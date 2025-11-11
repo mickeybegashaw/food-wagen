@@ -6,6 +6,7 @@ import "./globals.css";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
 
+
 const sourceSansPro = Source_Sans_3({
   subsets: ['latin'],
   variable: '--font-source-sans-pro',
@@ -24,6 +25,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body
