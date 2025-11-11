@@ -30,7 +30,7 @@ export default function AlertModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 p-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#C6C2C285] p-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-neutral-900 text-[#F5F5F5] pt-10 pb-5 mt-10">
+    <footer className="w-full bg-neutral-900 text-[#F5F5F5] pt-10 pb-5 mt-10 relative bottom-0">
       <div className="max-w-6xl mx-auto px-4 flex flex-col gap-5 md:flex-row md:justify-between">
         <div className="flex flex-col md:flex-row md:gap-20 gap-10">
           {/* Company */}

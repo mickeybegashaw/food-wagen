@@ -18,6 +18,23 @@ export const useFoods = () => {
   });
 };
 
+// search
+export const useSearchFoods = (name: string) => {
+  return useQuery({
+    queryKey: ["searchFoods", name],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://6852821e0594059b23cdd834.mockapi.io/Food?name=${encodeURIComponent(name)}`
+      );
+
+      if (!res.ok) throw new Error("Failed to fetch search results");
+      return res.json();
+    },
+    enabled: Boolean(name), 
+  });
+};
+
+
 // add food
 export const useAddFood = () => {
   const queryClient = useQueryClient();
