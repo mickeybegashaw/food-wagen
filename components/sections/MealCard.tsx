@@ -6,23 +6,65 @@ import { motion } from "framer-motion";
 import type { Food } from "@/types/index";
 import { useDeleteFood } from "@/lib/query";
 import DeleteMealModal from "../modals/ConfirmationModal";
+import AlertModal from "../modals/Alert";
 
 export default function MealCard({ food }: { food: Food }) {
+  console.log(food);
   const [openMenu, setOpenMenu] = useState(false);
   const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
+
+  const [alert, setAlert] = useState<{
+    isOpen: boolean;
+    message: string;
+    type: "success" | "error";
+  }>({
+    isOpen: false,
+    message: "",
+    type: "success",
+  });
+
   const deleteFood = useDeleteFood();
+
   const handleDelete = () => {
-    deleteFood.mutate(food.id);
-    setOpenDeleteConfirmation(false);
+    deleteFood.mutate(food.id, {
+      onSuccess: () => {
+        setAlert({
+          isOpen: true,
+          message: "Meal deleted successfully!",
+          type: "success",
+        });
+        setOpenDeleteConfirmation(false);
+      },
+      onError: () => {
+        setAlert({
+          isOpen: true,
+          message: "Failed to delete meal.",
+          type: "error",
+        });
+        setOpenDeleteConfirmation(false);
+      },
+    });
   };
+
+  const isValidUrl = (url: string) => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   const foodImage =
-    food.image && food.image.trim() !== ""
+    food.image && food.image.trim() !== "" && isValidUrl(food.image)
       ? food.image
       : "https://placehold.net/default.png";
+
   const restaurantImage =
-    food.logo && food.logo.trim() !== ""
+    food.logo && food.logo.trim() !== "" && isValidUrl(food.logo)
       ? food.logo
       : "https://placehold.net/default.png";
+
   const foodName =
     food.name && food.name.trim() !== "" ? food.name : "Unknown Meal";
   const rating = food.rating || "0.0";
@@ -114,6 +156,14 @@ export default function MealCard({ food }: { food: Food }) {
         open={openDeleteConfirmation}
         onConfirm={handleDelete}
         onCancel={() => setOpenDeleteConfirmation(false)}
+      />
+
+      {/* Alert Modal */}
+      <AlertModal
+        isOpen={alert.isOpen}
+        onClose={() => setAlert((prev) => ({ ...prev, isOpen: false }))}
+        message={alert.message}
+        type={alert.type}
       />
     </motion.div>
   );
