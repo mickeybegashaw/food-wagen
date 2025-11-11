@@ -4,9 +4,17 @@ import { Tag, Star, MoreVertical } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import type { Food } from "@/types/index";
+import { useDeleteFood } from "@/lib/query";
+import DeleteMealModal from "../modals/ConfirmationModal";
 
 export default function MealCard({ food }: { food: Food }) {
   const [openMenu, setOpenMenu] = useState(false);
+  const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
+  const deleteFood = useDeleteFood();
+  const handleDelete = () => {
+    deleteFood.mutate(food.id);
+    setOpenDeleteConfirmation(false);
+  };
   const foodImage =
     food.image && food.image.trim() !== ""
       ? food.image
@@ -75,7 +83,13 @@ export default function MealCard({ food }: { food: Food }) {
               <button className="block w-full text-left px-3 py-1 hover:bg-gray-100">
                 Edit
               </button>
-              <button className="block w-full text-left px-3 py-1 text-[red] hover:bg-gray-100">
+              <button
+                onClick={() => {
+                  setOpenMenu(false);
+                  setOpenDeleteConfirmation(true);
+                }}
+                className="block w-full text-left px-3 py-1 text-[red] hover:bg-gray-100"
+              >
                 Delete
               </button>
             </div>
@@ -94,6 +108,13 @@ export default function MealCard({ food }: { food: Food }) {
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      <DeleteMealModal
+        open={openDeleteConfirmation}
+        onConfirm={handleDelete}
+        onCancel={() => setOpenDeleteConfirmation(false)}
+      />
     </motion.div>
   );
 }

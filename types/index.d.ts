@@ -1,5 +1,5 @@
 export interface Food {
-  id: string | number;
+  id: string ;
   createdAt?: string | number;
 
   image?: string;
