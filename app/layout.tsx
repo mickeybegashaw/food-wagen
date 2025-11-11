@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
-import { 
-  Source_Sans_3, 
-} from 'next/font/google'; 
+import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
-
+import { Providers } from "@/components/sections/QueryClientProvider";
 
 const sourceSansPro = Source_Sans_3({
-  subsets: ['latin'],
-  variable: '--font-source-sans-pro',
-  weight: ['300', '400', '600', '700'], 
-  style: ['normal', 'italic' ], 
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-source-sans-pro",
+  weight: ["300", "400", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -25,15 +23,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
-      <body
-        className={`${sourceSansPro.variable} font-sans antialiased`}
-      >
-        <Header/>
-        {children}
-        <Footer/>
+      <body className={`${sourceSansPro.variable} font-sans antialiased`}>
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
