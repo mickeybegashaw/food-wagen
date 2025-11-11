@@ -3,8 +3,8 @@ import {
   Source_Sans_3, 
 } from 'next/font/google'; 
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/sections/Header";
+import Footer from "@/components/sections/Footer";
 
 const sourceSansPro = Source_Sans_3({
   subsets: ['latin'],

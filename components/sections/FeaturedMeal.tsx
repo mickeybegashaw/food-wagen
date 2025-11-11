@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import MealCard from "./MealCard";
-import DualRingLoader from "./ui/LoadingComponent";
+import DualRingLoader from "../ui/LoadingComponent";
 
 export default function FeaturedMeal() {
   const [foods, setFoods] = useState<any[]>([]);
