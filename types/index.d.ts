@@ -11,6 +11,7 @@ export interface Food {
   Price?: number | string;
 
   open?: boolean;
+  restaurantName?:string
 }
 
 export interface FormData {

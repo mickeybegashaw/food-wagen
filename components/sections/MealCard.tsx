@@ -4,14 +4,15 @@ import { Tag, Star, MoreVertical } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import type { Food } from "@/types/index";
-import { useDeleteFood } from "@/lib/query";
+import { useDeleteFood, useEditFood } from "@/lib/query";
 import DeleteMealModal from "../modals/ConfirmationModal";
 import AlertModal from "../modals/Alert";
+import EditMealModal from "../modals/EditMeal";
 
 export default function MealCard({ food }: { food: Food }) {
-  console.log(food);
   const [openMenu, setOpenMenu] = useState(false);
   const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
 
   const [alert, setAlert] = useState<{
     isOpen: boolean;
@@ -24,6 +25,7 @@ export default function MealCard({ food }: { food: Food }) {
   });
 
   const deleteFood = useDeleteFood();
+  const editFood = useEditFood();
 
   const handleDelete = () => {
     deleteFood.mutate(food.id, {
@@ -44,6 +46,41 @@ export default function MealCard({ food }: { food: Food }) {
         setOpenDeleteConfirmation(false);
       },
     });
+  };
+
+  const initialEditData = {
+    name: food.name || "",
+    restaurantName: food.restaurantName || "",
+    rating: food.rating || "0",
+    open: food.open ?? true,
+    image: food.image || "",
+    logo: food.logo || "",
+  };
+
+  const handleEdit = async (updatedFood: any) => {
+    editFood.mutate(
+      { 
+        id: food.id, 
+        updates: updatedFood // Wrap in 'updates' object
+      },
+      {
+        onSuccess: () => {
+          setAlert({
+            isOpen: true,
+            message: "Meal updated successfully!",
+            type: "success",
+          });
+          setOpenEditModal(false);
+        },
+        onError: () => {
+          setAlert({
+            isOpen: true,
+            message: "Failed to update meal.",
+            type: "error",
+          });
+        },
+      }
+    );
   };
 
   const isValidUrl = (url: string) => {
@@ -122,7 +159,13 @@ export default function MealCard({ food }: { food: Food }) {
           </button>
           {openMenu && (
             <div className="absolute right-5 top-64 bg-white text-black rounded-lg shadow-md w-24 text-sm overflow-hidden z-10">
-              <button className="block w-full text-left px-3 py-1 hover:bg-gray-100">
+              <button
+                onClick={() => {
+                  setOpenMenu(false);
+                  setOpenEditModal(true);
+                }}
+                className="block w-full text-left px-3 py-1 hover:bg-gray-100"
+              >
                 Edit
               </button>
               <button
@@ -164,6 +207,14 @@ export default function MealCard({ food }: { food: Food }) {
         onClose={() => setAlert((prev) => ({ ...prev, isOpen: false }))}
         message={alert.message}
         type={alert.type}
+      />
+
+      {/* Edit Meal Modal */}
+      <EditMealModal
+        isOpen={openEditModal}
+        onClose={() => setOpenEditModal(false)}
+        onSubmit={handleEdit}
+        initialData={initialEditData}
       />
     </motion.div>
   );
