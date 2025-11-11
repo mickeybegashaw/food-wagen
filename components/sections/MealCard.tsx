@@ -5,7 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import type { Food } from "@/types/index";
 import { useDeleteFood, useEditFood } from "@/lib/query";
-import DeleteMealModal from "../modals/ConfirmationModal";
+import ConfirmationModal from "../modals/ConfirmationModal";
 import AlertModal from "../modals/Alert";
 import EditMealModal from "../modals/EditMeal";
 
@@ -112,6 +112,7 @@ export default function MealCard({ food }: { food: Food }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="bg-white rounded-xl overflow-hidden relative hover:shadow-xl transition-all duration-150 flex flex-col gap-5"
+      data-testid="food-card"
     >
       {/* Image */}
       <div className="relative">
@@ -121,10 +122,14 @@ export default function MealCard({ food }: { food: Food }) {
           width={400}
           height={250}
           className="w-full h-52 object-cover"
+          data-testid="food-image"
         />
 
         {/* Price Tag */}
-        <div className="food-price absolute top-4 left-2 bg-[#F17228] px-2 py-1 rounded-md text-sm font-semibold flex items-center text-white">
+        <div 
+          className="food-price absolute top-4 left-2 bg-[#F17228] px-2 py-1 rounded-md text-sm font-semibold flex items-center text-white"
+          data-testid="food-price"
+        >
           <Tag size={14} className="mr-1 fill-white stroke-none" />$
           {food.Price ?? "—"}
         </div>
@@ -140,31 +145,50 @@ export default function MealCard({ food }: { food: Food }) {
               width={54}
               height={54}
               className="h-12 w-12 rounded-xl object-cover border border-gray-200"
+              data-testid="food-restaurant-logo"
             />
             <div>
-              <h3 className="food-name font-semibold text-lg text-[#424242] line-clamp-1 w-40">
+              <h3 
+                className="food-name font-semibold text-lg text-[#424242] line-clamp-1 w-40"
+                data-testid="food-name"
+              >
                 {foodName}
               </h3>
-              <div className="food-rating flex items-center gap-1 text-yellow-400">
+              <div 
+                className="food-rating flex items-center gap-1 text-yellow-400"
+                data-testid="food-rating"
+              >
                 <Star size={14} className="fill-yellow-400 stroke-none" />
                 <span>{rating}</span>
+              </div>
+              <div 
+                className="food-restaurant text-sm text-gray-600"
+                data-testid="food-restaurant"
+              >
+                {food.restaurantName}
               </div>
             </div>
           </div>
           <button
             onClick={() => setOpenMenu(!openMenu)}
             className="p-1 rounded-md text-black"
+            data-testid="food-menu-button"
+            aria-label="Food options"
           >
             <MoreVertical size={16} />
           </button>
           {openMenu && (
-            <div className="absolute right-5 top-64 bg-white text-black rounded-lg shadow-md w-24 text-sm overflow-hidden z-10">
+            <div 
+              className="absolute right-5 top-64 bg-white text-black rounded-lg shadow-md w-24 text-sm overflow-hidden z-10"
+              data-testid="food-menu"
+            >
               <button
                 onClick={() => {
                   setOpenMenu(false);
                   setOpenEditModal(true);
                 }}
                 className="block w-full text-left px-3 py-1 hover:bg-gray-100"
+                data-testid="food-edit-btn"
               >
                 Edit
               </button>
@@ -174,6 +198,7 @@ export default function MealCard({ food }: { food: Food }) {
                   setOpenDeleteConfirmation(true);
                 }}
                 className="block w-full text-left px-3 py-1 text-[red] hover:bg-gray-100"
+                data-testid="food-delete-btn"
               >
                 Delete
               </button>
@@ -188,6 +213,7 @@ export default function MealCard({ food }: { food: Food }) {
                 ? "bg-[#79B93C33] text-[#79B93C]"
                 : "bg-[#F1722833] text-[#F17228]"
             }`}
+            data-testid="food-status"
           >
             {food.open ? "Open Now" : "Closed"}
           </div>
@@ -195,10 +221,11 @@ export default function MealCard({ food }: { food: Food }) {
       </div>
 
       {/* Delete Confirmation Modal */}
-      <DeleteMealModal
+      <ConfirmationModal
         open={openDeleteConfirmation}
         onConfirm={handleDelete}
         onCancel={() => setOpenDeleteConfirmation(false)}
+        data-testid="food-delete-modal"
       />
 
       {/* Alert Modal */}
@@ -207,6 +234,7 @@ export default function MealCard({ food }: { food: Food }) {
         onClose={() => setAlert((prev) => ({ ...prev, isOpen: false }))}
         message={alert.message}
         type={alert.type}
+        data-testid="food-alert"
       />
 
       {/* Edit Meal Modal */}
@@ -215,6 +243,7 @@ export default function MealCard({ food }: { food: Food }) {
         onClose={() => setOpenEditModal(false)}
         onSubmit={handleEdit}
         initialData={initialEditData}
+        data-testid="food-edit-modal"
       />
     </motion.div>
   );

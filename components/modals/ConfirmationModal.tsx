@@ -8,7 +8,7 @@ interface DeleteMealModalProps {
   onCancel: () => void;
 }
 
-export default function DeleteMealModal({
+export default function ConfirmationModal({
   open,
   onConfirm,
   onCancel,
@@ -39,6 +39,8 @@ export default function DeleteMealModal({
 
             <div className="flex justify-center gap-6 mt-5">
               <button
+                data-test-id="food-confirm-delete-btn"
+
                 onClick={onConfirm}
                 className="w-1/2 py-2 btn-secondary text-white text-sm font-semibold rounded-xl shadow-md"
               >
