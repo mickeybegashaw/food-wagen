@@ -18,7 +18,7 @@ export default function AlertModal({
   message,
   type = "info",
   autoClose = true,
-  duration = 4500,
+  duration = 5500,
 }: AlertModalProps) {
   if (isOpen && autoClose) {
     setTimeout(() => {

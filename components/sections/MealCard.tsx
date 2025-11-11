@@ -61,7 +61,7 @@ export default function MealCard({ food }: { food: Food }) {
     editFood.mutate(
       { 
         id: food.id, 
-        updates: updatedFood // Wrap in 'updates' object
+        updates: updatedFood 
       },
       {
         onSuccess: () => {
@@ -142,7 +142,7 @@ export default function MealCard({ food }: { food: Food }) {
               className="h-12 w-12 rounded-xl object-cover border border-gray-200"
             />
             <div>
-              <h3 className="food-name font-semibold text-lg text-[#424242] line-clamp-1">
+              <h3 className="food-name font-semibold text-lg text-[#424242] line-clamp-1 w-40">
                 {foodName}
               </h3>
               <div className="food-rating flex items-center gap-1 text-yellow-400">

@@ -24,7 +24,7 @@ export interface FormData {
 }
 
 
-interface AlertModalProps {
+export interface AlertModalProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
@@ -32,4 +32,17 @@ interface AlertModalProps {
   type?: "success" | "error" | "info"; 
   autoClose?: boolean; 
   duration?: number; 
+}
+
+export interface EditMealModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (data: FoodType) => Promise<void> | void;
+  initialData: FoodType;
+}
+
+export interface AddMealModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (data: FoodType) => Promise<void> | void;
 }

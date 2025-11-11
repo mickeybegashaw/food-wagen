@@ -6,12 +6,8 @@ import type { FormData } from "@/types/index";
 import { foodSchema, type FoodType } from "@/lib/ZodSchema";
 import z from "zod";
 import InputField from "../ui/InputField";
+import type { AddMealModalProps } from "@/types";
 
-interface AddMealModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (data: FoodType) => Promise<void> | void;
-}
 
 export function AddMealModal({ isOpen, onClose, onSubmit }: AddMealModalProps) {
   const [formData, setFormData] = useState<FormData>({

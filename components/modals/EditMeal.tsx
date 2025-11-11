@@ -6,13 +6,8 @@ import type { FoodType } from "@/lib/ZodSchema";
 import { foodSchema } from "@/lib/ZodSchema";
 import z from "zod";
 import InputField from "../ui/InputField";
+import type { EditMealModalProps } from "@/types";
 
-interface EditMealModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (data: FoodType) => Promise<void> | void;
-  initialData: FoodType;
-}
 
 export default function EditMealModal({
   isOpen,
