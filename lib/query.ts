@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { foodSchema, FoodType } from "./ZodSchema";
 
+
 const API_URL = "https://6852821e0594059b23cdd834.mockapi.io/Food";
 
 // fetch
