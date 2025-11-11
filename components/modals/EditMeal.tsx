@@ -158,7 +158,7 @@ export default function EditMealModal({
                 disabled={isSubmitting}
                 className="flex-1 rounded-lg px-6 py-3 font-semibold btn-secondary disabled:opacity-50"
               >
-                {isSubmitting ? "Updating..." : "Update"}
+                {isSubmitting ? "Updating..." : "Update Food"}
               </button>
               <button
                 type="button"

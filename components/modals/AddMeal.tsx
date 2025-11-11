@@ -159,7 +159,7 @@ export function AddMealModal({ isOpen, onClose, onSubmit }: AddMealModalProps) {
                 disabled={isSubmitting}
                 className="flex-1 rounded-lg px-6 py-3 font-semibold btn-secondary disabled:opacity-50"
               >
-                {isSubmitting ? "Adding..." : "Add"}
+                {isSubmitting ? "Adding..." : "Add Food"}
               </button>
               <button
                 type="button"
