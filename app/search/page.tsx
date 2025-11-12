@@ -1,20 +1,59 @@
 "use client";
+export const dynamic = "force-dynamic";
+
+
 import { useSearchParams } from "next/navigation";
 import { useSearchFoods } from "@/lib/query";
 import MealCard from "@/components/sections/MealCard";
-import { Food } from "@/types";
 import DualRingLoader from "@/components/ui/LoadingComponent";
 import Link from "next/link";
-
-export const dynamic = 'force-dynamic';
+import type { Food } from "@/types";
 
 export default function SearchPage() {
-  const query = useSearchParams().get("name") || "";
-  const { data: foods = [], isLoading } = useSearchFoods(query);
+  const searchParams = useSearchParams();
+  const query = searchParams.get("name")?.trim() || "";
 
-  
+  const {
+    data: foods = [],
+    isLoading,
+    isError,
+  } = useSearchFoods(query);
 
-  if (isLoading)
+  // 🧩 Handle empty query (no search term)
+  if (!query) {
+    return (
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 min-h-screen text-center">
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          No search term provided
+        </h1>
+        <p className="text-gray-600 mb-8">
+          Please enter a food name to search for delicious meals.
+        </p>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors duration-200"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
+          </svg>
+          Back to Home
+        </Link>
+      </section>
+    );
+  }
+
+  // 🌀 Loading state
+  if (isLoading) {
     return (
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
         <div className="text-center mb-12">
@@ -28,14 +67,18 @@ export default function SearchPage() {
         </div>
       </section>
     );
+  }
 
+  
+
+  // 🎯 Main Results Section
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
-      {/* Header Section */}
+      {/* Header */}
       <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-3 mb-4">
-          <h1 className="text-3xl font-bold text-gray-900">Search Results</h1>
-        </div>
+        <h1 className="text-3xl font-bold text-gray-900 mb-3">
+          Search Results
+        </h1>
 
         <p className="text-lg text-gray-600">
           Showing results for:{" "}
@@ -45,7 +88,7 @@ export default function SearchPage() {
         </p>
       </div>
 
-      {/* Results Grid */}
+      {/* Results */}
       {foods.length === 0 ? (
         <div className="text-center py-12">
           <div className="max-w-md mx-auto">
@@ -53,31 +96,48 @@ export default function SearchPage() {
               No meals found
             </h3>
             <p className="text-gray-500 mb-6">
-              We couldn't find any meals matching{" "}
+              We couldn’t find any meals matching{" "}
               <span className="font-medium text-gray-700">{query}</span>. Try
               searching with different keywords.
             </p>
-
-            <div>
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors duration-200 group"
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors duration-200 group"
+            >
+              <svg
+                className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform duration-200"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                  />
-                </svg>
-                Back to Home
-              </Link>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Back to Home
+            </Link>
+          </div>
+
+          {/* Suggestions */}
+          <div className="mt-12 text-center">
+            <p className="text-sm font-medium text-gray-500 mb-4">
+              POPULAR SEARCHES
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {["Chicken", "Pasta", "Salad", "Dessert", "Vegetarian", "Breakfast"].map(
+                (term) => (
+                  <Link
+                    key={term}
+                    href={`/search?name=${encodeURIComponent(term)}`}
+                    className="px-4 py-2 text-sm bg-white border border-gray-200 rounded-full hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors duration-200"
+                  >
+                    {term}
+                  </Link>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -86,33 +146,6 @@ export default function SearchPage() {
           {foods.map((food: Food) => (
             <MealCard key={food.id} food={food} />
           ))}
-        </div>
-      )}
-
-      {/* Quick Search Suggestions */}
-      {foods.length === 0 && (
-        <div className="mt-12 text-center">
-          <p className="text-sm font-medium text-gray-500 mb-4">
-            POPULAR SEARCHES
-          </p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {[
-              "Chicken",
-              "Pasta",
-              "Salad",
-              "Dessert",
-              "Vegetarian",
-              "Breakfast",
-            ].map((term) => (
-              <Link
-                key={term}
-                href={`/search?name=${term}`}
-                className="px-4 py-2 text-sm bg-white border border-gray-200 rounded-full hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors duration-200"
-              >
-                {term}
-              </Link>
-            ))}
-          </div>
         </div>
       )}
     </section>
