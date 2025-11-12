@@ -6,9 +6,13 @@ import { Food } from "@/types";
 import DualRingLoader from "@/components/ui/LoadingComponent";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 export default function SearchPage() {
   const query = useSearchParams().get("name") || "";
   const { data: foods = [], isLoading } = useSearchFoods(query);
+
+  
 
   if (isLoading)
     return (
@@ -36,11 +40,10 @@ export default function SearchPage() {
         <p className="text-lg text-gray-600">
           Showing results for:{" "}
           <span className="font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-            "{query}"
+            {query}
           </span>
         </p>
       </div>
-
 
       {/* Results Grid */}
       {foods.length === 0 ? (
@@ -50,8 +53,8 @@ export default function SearchPage() {
               No meals found
             </h3>
             <p className="text-gray-500 mb-6">
-              We couldn't find any meals matching "
-              <span className="font-medium text-gray-700">"{query}"</span>". Try
+              We couldn't find any meals matching{" "}
+              <span className="font-medium text-gray-700">{query}</span>. Try
               searching with different keywords.
             </p>
 
@@ -101,13 +104,13 @@ export default function SearchPage() {
               "Vegetarian",
               "Breakfast",
             ].map((term) => (
-              <button
+              <Link
                 key={term}
+                href={`/search?name=${term}`}
                 className="px-4 py-2 text-sm bg-white border border-gray-200 rounded-full hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors duration-200"
-                onClick={() => (window.location.href = `/search?name=${term}`)}
               >
                 {term}
-              </button>
+              </Link>
             ))}
           </div>
         </div>
