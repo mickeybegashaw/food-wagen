@@ -28,24 +28,22 @@ export default function MealCard({ food }: { food: Food }) {
   const editFood = useEditFood();
 
   const handleDelete = () => {
-    deleteFood.mutate(food.id, {
-      onSuccess: () => {
-        setAlert({
-          isOpen: true,
-          message: "Meal deleted successfully!",
-          type: "success",
-        });
-        setOpenDeleteConfirmation(false);
-      },
-      onError: () => {
-        setAlert({
-          isOpen: true,
-          message: "Failed to delete meal.",
-          type: "error",
-        });
-        setOpenDeleteConfirmation(false);
-      },
-    });
+    try {
+      deleteFood.mutate(food.id);
+      setAlert({
+        isOpen: true,
+        message: "Meal deleted successfully!",
+        type: "success",
+      });
+      setOpenDeleteConfirmation(false);
+    } catch (error) {
+      setAlert({
+        isOpen: true,
+        message: "Failed to delete meal.",
+        type: "error",
+      });
+      setOpenDeleteConfirmation(false);
+    }
   };
 
   const initialEditData = {
@@ -58,29 +56,28 @@ export default function MealCard({ food }: { food: Food }) {
   };
 
   const handleEdit = async (updatedFood: any) => {
-    editFood.mutate(
-      { 
-        id: food.id, 
-        updates: updatedFood 
-      },
-      {
-        onSuccess: () => {
-          setAlert({
-            isOpen: true,
-            message: "Meal updated successfully!",
-            type: "success",
-          });
-          setOpenEditModal(false);
-        },
-        onError: () => {
-          setAlert({
-            isOpen: true,
-            message: "Failed to update meal.",
-            type: "error",
-          });
-        },
-      }
-    );
+    try {
+      await editFood.mutateAsync({
+        id: food.id,
+        updates: updatedFood,
+      });
+
+      setAlert({
+        isOpen: true,
+        message: "Meal updated successfully!",
+        type: "success",
+      });
+
+      setOpenEditModal(false);
+    } catch (error) {
+      console.error("Failed to edit meal:", error);
+
+      setAlert({
+        isOpen: true,
+        message: "Failed to update meal.",
+        type: "error",
+      });
+    }
   };
 
   const isValidUrl = (url: string) => {
@@ -126,7 +123,7 @@ export default function MealCard({ food }: { food: Food }) {
         />
 
         {/* Price Tag */}
-        <div 
+        <div
           className="food-price absolute top-4 left-2 bg-[#F17228] px-2 py-1 rounded-md text-sm font-semibold flex items-center text-white"
           data-testid="food-price"
         >
@@ -148,20 +145,20 @@ export default function MealCard({ food }: { food: Food }) {
               data-testid="food-restaurant-logo"
             />
             <div>
-              <h3 
+              <h3
                 className="food-name font-semibold text-lg text-[#424242] line-clamp-1 w-40"
                 data-testid="food-name"
               >
                 {foodName}
               </h3>
-              <div 
+              <div
                 className="food-rating flex items-center gap-1 text-yellow-400"
                 data-testid="food-rating"
               >
                 <Star size={14} className="fill-yellow-400 stroke-none" />
                 <span>{rating}</span>
               </div>
-              <div 
+              <div
                 className="food-restaurant text-sm text-gray-600"
                 data-testid="food-restaurant"
               >
@@ -178,7 +175,7 @@ export default function MealCard({ food }: { food: Food }) {
             <MoreVertical size={16} />
           </button>
           {openMenu && (
-            <div 
+            <div
               className="absolute right-5 top-64 bg-white text-black rounded-lg shadow-md w-24 text-sm overflow-hidden z-10"
               data-testid="food-menu"
             >

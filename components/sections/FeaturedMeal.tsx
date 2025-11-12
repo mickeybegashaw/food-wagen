@@ -1,24 +1,21 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MealCard from "./MealCard";
 import DualRingLoader from "../ui/LoadingComponent";
-import { useFoods, useDeleteFood } from "@/lib/query";
-
+import { useFoods } from "@/lib/query";
 
 export default function FeaturedMeal() {
-    const { data: foods = [], isLoading, error } = useFoods();
+  const { data: foods = [], isLoading, error } = useFoods();
 
   const [showAll, setShowAll] = useState(false);
-
-  
 
   if (isLoading)
     return (
       <section className="h-screen">
-         <h1 className="font-bold  mb-10 text-center text-2xl md:text-3xl text-[#212121]">
-        Featured Meals
-      </h1>
-        <DualRingLoader/>
+        <h1 className="font-bold  mb-10 text-center text-2xl md:text-3xl text-[#212121]">
+          Featured Meals
+        </h1>
+        <DualRingLoader />
       </section>
     );
 
@@ -58,7 +55,13 @@ export default function FeaturedMeal() {
             onClick={() => setShowAll(!showAll)}
             className="btn-secondary text-sm font-semibold py-3 px-10 rounded-xl  shadow-md hover:opacity-90 transition"
           >
-            {showAll ? <p>Show Less</p> : <p>Show More <span className="ml-2">{">"}</span></p>}
+            {showAll ? (
+              <p>Show Less</p>
+            ) : (
+              <p>
+                Show More <span className="ml-2">{">"}</span>
+              </p>
+            )}
           </button>
         </div>
       )}
