@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍔 FoodWagen
 
-## Getting Started
+A web application built for the **Web Project Assessment**.  
+This project demonstrates front-end development skills using **Next.js**, **TypeScript**, and **Tailwind CSS**, focusing on clean code, reusability, accessibility, and API integration.
 
-First, run the development server:
+---
+
+## 🚀 Live Demo
+
+🔗 [View Deployed App](https://food-wagen-pro.vercel.app/)  
+🔗 [GitHub Repository](https://github.com/mickeybegashaw/food-wagen)
+
+---
+
+## 📖 Overview
+
+**FoodWagen** is a simple yet functional web app that allows users to manage food items.  
+It supports viewing, searching, adding, editing, and deleting food items, all connected to a mock API.
+
+This project was created as evaluate:
+- UI/UX consistency with a Figma design  
+- API integration and CRUD functionality  
+- Component reusability and state management  
+- Code structure, scalability, and testing practices  
+
+---
+
+
+## 🧩 Features
+
+✅ View a list of all food items  
+✅ Search foods by name  
+✅ Add new food items  
+✅ Edit and delete existing foods  
+✅ Display restaurant details (name, logo, status)  
+✅ Error and validation handling  
+✅ Smooth entry and hover animations  
+✅ Fully responsive design  
+✅ Loading states for all API calls  
+
+---
+
+## ⚙️ Tech Stack
+
+| Category | Technology |
+|-----------|-------------|
+| **Framework** | [Next.js 14](https://nextjs.org/) |
+| **Language** | [TypeScript](https://www.typescriptlang.org/) |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) |
+| **State Management** | React Query / useState / useEffect |
+| **Validation** | [Zod](https://zod.dev/) |
+| **Testing** | [Jest](https://jestjs.io/) + [React Testing Library](https://testing-library.com/) |
+| **Animations** | [Framer Motion](https://www.framer.com/motion/) |
+| **Deployment** | [Vercel](https://vercel.com/) |
+
+---
+
+## 📦 Installation & Setup
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/mickeybegashaw/food-wagen.git
+
+# 2. Navigate into the project folder
+cd food-wagen
+
+# 3. Install dependencies
+npm install
+
+# 4. Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 5. Open your browser
+http://localhost:3000
