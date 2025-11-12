@@ -29,7 +29,6 @@ export default function SearchContent() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
-      {/* Header Section */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-3 mb-4">
           <h1 className="text-3xl font-bold text-gray-900">Search Results</h1>
@@ -43,7 +42,7 @@ export default function SearchContent() {
         </p>
       </div>
 
-      {/* Results Grid */}
+      {/*  Grid */}
       {foods.length === 0 ? (
         <div className="text-center py-12">
           <div className="max-w-md mx-auto">
@@ -87,7 +86,7 @@ export default function SearchContent() {
         </div>
       )}
 
-      {/* Quick Search Suggestions */}
+      {/* Suggestions */}
       {foods.length === 0 && (
         <div className="mt-12 text-center">
           <p className="text-sm font-medium text-gray-500 mb-4">

@@ -102,11 +102,11 @@ export function AddMealModal({ isOpen, onClose, onSubmit }: AddMealModalProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="w-full  max-w-[670px] mt-48 pt-16 rounded-2xl bg-white p-4 shadow-lg flex flex-col items-center"
+          className="w-full  max-w-[670px] mt-24 md:mt-48 pt-10 md:pt-16 rounded-2xl bg-white p-4 shadow-lg flex flex-col items-center"
         >
-          <h1 className="mb-2 text-center text-3xl font-bold text-amber-500">Add a meal</h1>
+          <h1 className="mb-2 text-center text-2xl md:text-3xl font-bold text-amber-500">Add a meal</h1>
 
-          <form onSubmit={handleSubmit} noValidate className="space-y-4 w-[70%]">
+          <form onSubmit={handleSubmit} noValidate className="space-y-4 w-[85%] md:w-[70%]">
             <InputField
               name="foodName"
               placeholder="Food name"
